@@ -69,16 +69,16 @@ class PostGISOperator(SpatialOperator):
         if not self.raster or spheroid:
             # Operators without raster support.
             if lhs_is_raster:
-                template_params['lhs'] = 'ST_Polygon(%s)' % template_params['lhs']
+                template_params['lhs'] = '%s' % template_params['lhs']
             if rhs_is_raster:
-                template_params['rhs'] = 'ST_Polygon(%s)' % template_params['rhs']
+                template_params['rhs'] = '%s' % template_params['rhs']
         elif self.raster == BILATERAL:
             # Operators with raster support but don't support mixed (rast-geom)
             # lookups.
             if lhs_is_raster and not rhs_is_raster:
-                template_params['lhs'] = 'ST_Polygon(%s)' % template_params['lhs']
+                template_params['lhs'] = '%s' % template_params['lhs']
             elif rhs_is_raster and not lhs_is_raster:
-                template_params['rhs'] = 'ST_Polygon(%s)' % template_params['rhs']
+                template_params['rhs'] = '%s' % template_params['rhs']
 
         return template_params
 
